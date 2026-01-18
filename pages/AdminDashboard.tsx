@@ -21,7 +21,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onUpdateStaff,
   onUpdateDirector
 }) => {
-  const [activeTab, setActiveTab] = useState<'projects' | 'staff' | 'director'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'staff' | 'director' | 'export'>('projects');
   const [isEditing, setIsEditing] = useState(false);
   const [editProject, setEditProject] = useState<Partial<Project>>({});
   const [editStaff, setEditStaff] = useState<Partial<Staff>>({});
@@ -73,6 +73,29 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setIsEditing(false);
   };
 
+  // data.ts 형식으로 코드를 생성하는 함수
+  const generateDataFileContent = () => {
+    const content = `import { Project, ProjectCategory, Staff, TimelineEvent } from './types';
+
+export const INITIAL_PROJECTS: Project[] = ${JSON.stringify(projects, null, 2)};
+
+export const INITIAL_STAFF: Staff[] = ${JSON.stringify(staff, null, 2)};
+
+export const TIMELINE_DATA: TimelineEvent[] = [
+  { id: 't1', year: '2015', title: 'Graduation', description: 'Earned MFA in Film Production from NYU Tisch School of the Arts.' },
+  { id: 't2', year: '2018', title: 'Breakthrough Short', description: 'Directed "Neon Pulse", which won Best Short Film at the Independent Film Awards.' },
+  { id: 't3', year: '2021', title: 'First Feature', description: 'Released "The Echo Room" to critical acclaim globally.' },
+  { id: 't4', year: '2024', title: 'AI Exploration', description: 'Pioneered generative AI workflows in professional narrative filmmaking.' }
+];
+`;
+    return content;
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    alert("복사되었습니다! data.ts 파일에 덮어쓰고 다시 배포하세요.");
+  };
+
   return (
     <div className="pt-24 min-h-screen max-w-7xl mx-auto px-6 pb-32">
       <header className="flex flex-col md:flex-row justify-between items-center py-16 gap-8 border-b border-white/5 mb-12">
@@ -80,23 +103,52 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <h1 className="text-4xl font-serif text-white tracking-widest uppercase">Dashboard</h1>
           <p className="text-neutral-500 mt-2 text-sm">Fine-tune your visual legacy.</p>
         </div>
-        <div className="flex bg-neutral-900/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-sm">
-          {(['projects', 'staff', 'director'] as const).map(tab => (
+        <div className="flex bg-neutral-900/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-sm overflow-x-auto">
+          {(['projects', 'staff', 'director', 'export'] as const).map(tab => (
             <button 
               key={tab}
               onClick={() => { setActiveTab(tab); setIsEditing(false); }}
-              className={`px-8 py-2.5 rounded-md transition-all text-[10px] uppercase tracking-[0.2em] font-bold ${activeTab === tab ? 'bg-yellow-500 text-black shadow-lg' : 'text-neutral-400 hover:text-white'}`}
+              className={`px-6 md:px-8 py-2.5 rounded-md transition-all text-[10px] uppercase tracking-[0.2em] font-bold whitespace-nowrap ${activeTab === tab ? 'bg-yellow-500 text-black shadow-lg' : 'text-neutral-400 hover:text-white'}`}
             >
-              {tab}
+              {tab === 'export' ? 'Sync & Export' : tab}
             </button>
           ))}
         </div>
       </header>
 
-      {activeTab === 'director' ? (
+      {activeTab === 'export' ? (
+        <div className="bg-neutral-900/40 p-10 rounded-sm border border-white/5 animate-in fade-in">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-serif mb-4 text-white">데이터 동기화 (Sync Data)</h2>
+            <p className="text-neutral-400 text-sm leading-relaxed mb-8">
+              현재 브라우저(사파리 등)에서 수정한 내용은 기기에만 저장됩니다. <br />
+              핸드폰이나 다른 브라우저에서도 똑같이 보이게 하려면 아래 버튼을 눌러 코드를 복사한 뒤, 
+              <strong> data.ts </strong> 파일의 내용을 교체하고 다시 배포(Redeploy)하세요.
+            </p>
+            
+            <div className="space-y-6">
+              <div className="bg-black p-6 rounded border border-white/10">
+                <h3 className="text-yellow-500 text-xs font-bold uppercase tracking-widest mb-4">Export Code</h3>
+                <p className="text-neutral-500 text-[11px] mb-4">아래 코드를 복사하여 data.ts 파일에 붙여넣으세요.</p>
+                <button 
+                  onClick={() => copyToClipboard(generateDataFileContent())}
+                  className="bg-white/10 hover:bg-yellow-500 hover:text-black text-white px-6 py-3 rounded text-[10px] font-bold uppercase tracking-widest transition-all w-full mb-4"
+                >
+                  <i className="fas fa-copy mr-2"></i> Copy data.ts Content
+                </button>
+                <textarea 
+                  readOnly 
+                  value={generateDataFileContent()} 
+                  className="w-full h-40 bg-black/50 border border-white/5 text-[10px] text-neutral-600 p-4 font-mono overflow-y-auto resize-none"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : activeTab === 'director' ? (
         <div className="bg-neutral-900/40 p-10 rounded-sm border border-white/5 animate-in fade-in">
           <h2 className="text-2xl font-serif mb-10 text-white">Director Profile</h2>
-          <form onSubmit={(e) => { e.preventDefault(); onUpdateDirector(editDirector); alert("Updated!"); }} className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <form onSubmit={(e) => { e.preventDefault(); onUpdateDirector(editDirector); alert("감독 정보가 저장되었습니다! (브라우저 로컬)"); }} className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="space-y-6">
               {[
                 { label: 'Name (KR)', key: 'name' },
@@ -125,7 +177,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 ></textarea>
               </label>
               <button type="submit" className="w-full bg-yellow-500 text-black font-bold uppercase py-5 rounded-sm hover:bg-yellow-400 transition-all text-xs tracking-widest shadow-xl">
-                Update Profile
+                Update Profile (Local)
               </button>
             </div>
           </form>
