@@ -8,23 +8,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        // 배포 환경에서 process.env 접근 시 에러 방지
+        window.process = { env: { API_KEY: '' } };
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000;
             color: #d1d5db;
+            margin: 0;
+            overflow-x: hidden;
         }
         h1, h2, h3, .font-serif {
             font-family: 'Playfair Display', serif;
         }
         .accent-yellow { color: #facc15; }
         .bg-accent-yellow { background-color: #facc15; }
-        .border-accent-yellow { border-color: #facc15; }
         
-        ::-webkit-scrollbar { width: 6px; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #333; }
         ::-webkit-scrollbar-thumb:hover { background: #facc15; }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.5s ease-out forwards; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #facc15; }
     </style>
 <script type="importmap">
 {
@@ -40,5 +56,7 @@
 </head>
 <body>
     <div id="root"></div>
+    <!-- index.tsx 명시적 로드 -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
