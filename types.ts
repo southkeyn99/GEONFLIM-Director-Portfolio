@@ -1,7 +1,8 @@
 
 export enum ProjectCategory {
-  FILM = 'Film',
+  DIRECTING = 'Directing',
   AI_FILM = 'AI Film',
+  PRODUCING = 'AD & Producing',
   CINEMATOGRAPHY = 'Cinematography',
   COMMERCIAL = 'Commercial'
 }
@@ -10,38 +11,32 @@ export interface Project {
   id: string;
   category: ProjectCategory;
   title: string;
-  titleEn?: string; // 영어 제목 추가
+  titleEn?: string;
   year: string;
   role: string;
-  description: string;
-  posterUrl: string;
-  stillUrls: string[];
-  genre?: string;
-  runningTime?: string;
+  description?: string;
+  posterUrl?: string;
   awards?: string;
+  awardsList?: string[];
+  isAI?: boolean;
+  isFeature?: boolean;
+  link?: string;
   synopsis?: string;
-}
-
-export interface Staff {
-  id: string;
-  name: string;
-  nameEn?: string; // 영어 이름 추가
-  role: string;
-  photoUrl: string;
-  bio?: string;
-}
-
-export interface TimelineEvent {
-  id: string;
-  year: string;
-  title: string;
-  description: string;
+  stillPhotos?: string[];
+  genre?: string;
+  runtime?: string;
+  aspectRatio?: string;
 }
 
 export interface DirectorInfo {
   name: string;
+  nameEn: string;
   title: string;
+  phone: string;
+  email: string;
+  instagram: string;
+  youtube: string;
+  adPortfolio: string;
   bio: string;
-  quote: string;
   profileImageUrl: string;
 }
