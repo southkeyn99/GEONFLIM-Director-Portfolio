@@ -1,3 +1,4 @@
+
 import { Project, ProjectCategory } from './types';
 
 export const DIRECTOR_INFO = {
@@ -9,7 +10,15 @@ export const DIRECTOR_INFO = {
   instagram: "https://www.instagram.com/n_geon",
   youtube: "https://www.youtube.com/@소질소",
   adPortfolio: "https://www.youtube.com/@남궁건-광고-포폴/shorts",
-  bio: "전통적인 영화 문법과 최신 AI 기술을 결합하여 새로운 시각적 경험을 설계합니다. 명필름 단편스쿨 수료 및 다수의 독립영화제 수상 경력을 바탕으로, 타협하지 않는 서사와 미학을 추구하며 관객에게 깊은 여운을 남기는 비주얼 스토리텔링을 연구합니다.",
+  bio: `남궁건은 영화를 만든다.
+
+다수의 단편영화와 AI 기반 영화 작업을 연출·각본하며, 저예산 제작 방식과 새로운 기술을 적극적으로 실험해 왔다. 첫 장편 영화 <그린비치>는 ‘백일 안에 백만 원으로 백 분짜리 장편영화 찍기’ 프로젝트인 프로젝트 백백백을 통해 완성되었으며, 한국영상자료원에서 상영되었다.
+
+단편 영화 <아부지>는 명필름 단편스쿨 수료작으로 제3회 UFO 영화제에 초청되었고, 제4회 경기도예술영화제에서 대상을 수상했다. <도애의 시간>은 경기갭이어프로그램 지원작으로 제작되어 목포국도1호선독립영화제 도움닫기 작품상을 비롯해 다수 영화제에 초청·입상했다. AI 단편 <마지막 명령>은 AI 영화제와 금천패션영화제에서 상영 및 수상되며 기술 기반 서사의 가능성을 확장했다.
+
+연출뿐 아니라 촬영감독으로도 활동하며 <복채>, <노이즈캔슬링> 등 여러 단편이 국내외 영화제에서 상영·수상되었다. 또한 프로듀서, 조감독으로 다양한 독립영화와 영화제 프로젝트에 참여했고, 광고·브랜드 콘텐츠 프로듀서로서 기획, 촬영, 편집 전반을 수행해 왔다.
+
+영화와 영상 전반을 가로지르며, 기획된 작업과 즉흥적인 실험을 오가며 이미지를 만들어 나가고 있다.`,
   profileImageUrl: "https://drive.google.com/file/d/1KC4WwDiTCI61k7ePdIj6iRoF4eDmQAWY/view?usp=share_link"
 };
 
@@ -29,9 +38,9 @@ export const PROJECTS: Project[] = [
     synopsis: `어릴적 아버지의 폭력으로 집을 나온 이후, 공황장애를 얻게 된 현수. 
 20년만에 누나의 부탁으로 치매에 걸린 아버지를 돌보게 된다.`,
     awardsList: [
+      '제 4회 경기도예술영화제 대상',
       '24년 명필름 단편스쿨 수료작',
-      '제 3회 UFO 영화제 초청상영',
-      '제 4회 경기도예술영화제 대상'
+      '제 3회 UFO 영화제 초청상영'
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1UQ7MLFAol5oGzx194FkiwXu9iDBbgU8D/view?usp=sharing',
@@ -67,6 +76,15 @@ export const PROJECTS: Project[] = [
     awardsList: [
       '제 5회 금천패션영화제 경쟁작',
       '제 3회 죽서 AI 영화제 장려상 수상'
+    ],
+    stillPhotos: [
+      'https://drive.google.com/file/d/18XM-ALuwdvh2NpLgHBSCMHolS9Gw8T_j/view?usp=sharing',
+      'https://drive.google.com/file/d/1t0EOxG8aDXmB0VoJkknUiGOhSTC4NplN/view?usp=sharing',
+      'https://drive.google.com/file/d/1sd_kDTynjDFmxLA3D-gca2Gepxtw7eh-/view?usp=sharing',
+      'https://drive.google.com/file/d/150kMS3XEJs5zYT1tq0cJZgvSkm1xa7zo/view?usp=sharing',
+      'https://drive.google.com/file/d/1gOMlDTNqNwf7GOvtH9z69dgUIZp4Qa77/view?usp=sharing',
+      'https://drive.google.com/file/d/1ThTRT9esldS8L8aeTzd-Zz-FOq9kWqkm/view?usp=sharing',
+      'https://drive.google.com/file/d/1M_QaLkcfvPrS2nxfNRD8MVimuirUCXEm/view?usp=sharing'
     ]
   },
   {
@@ -115,8 +133,8 @@ export const PROJECTS: Project[] = [
 지애는 아버지의 무덤 앞에서 탭 댄스를 추려고 한다. 
 도애는 그런 언니가 미쳤다고만 생각했다.`,
     awardsList: [
+      '11회 목포국도1호선독립영화제 도움닫기 작품상',
       '경기갭이어프로그램 지원작',
-      '24년 11회 목포국도1호선독립영화제 도움닫기 작품상',
       '2024 김해시민영화제 초청상영',
       '제 1회 느림독립영화제 입상'
     ],
@@ -142,15 +160,24 @@ export const PROJECTS: Project[] = [
     runtime: '63min 47sec',
     aspectRatio: '2.35:1',
     posterUrl: 'https://drive.google.com/file/d/1deNl-oHGpSjmVxd5CbFZovAMTsyAFLPm/view?usp=share_link',
-    description: "백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트",
-    synopsis: `해변에서 녹색 페인트를 뒤집어쓰고 실종된 의문의 여자 '서이서' 
-세영은 해변에서 그녀가 버린 필름을 우연히 발견한다. 
-그리고 그녀의 존재가 궁금해진 세영은 이서를 찾기 위해 필름 안에 들어 있던 사진들을 전시하기로 결심한다.
- 세영은 사진전에 찾아온 이서의 전 애인 동우와 절친 해주를 인터뷰하며 이서가 어떤 사람이었을지를 묻는다. 
-그런데 동우와 해주가 회상하는 이서는 마치 다른 person인 듯 매우 다르다.
- 대체 서이서는 어떤 사람이었을까. 
-세영이 혼란스러워 할 때쯤 진짜 서이서가 사진전에 찾아오는데...`,
+    description: `"우리도 그린스크린처럼\n‘나’라는 역할에서 벗어나, 무한한 가능성을 가질 순 없는 걸까."`,
+    synopsis: `해변에서 녹색 페인트를 뒤집어쓰고 실종된 의문의 여자 
+
+'서이서'
+
+세영은 해변에서 그녀가 버린 필름을 우연히 발견한다.
+그리고 그녀의 존재가 궁금해진 세영은 이서를 찾기 위해 
+필름 안에 들어 있던 사진들을 전시하기로 결심한다.
+
+세영은 사진전에 찾아온 이서의 전 애인 동우와 절친 해주를 인터뷰하며 
+이서가 어떤 사람이었을지를 묻는다.
+
+그런데 동우와 해주가 회상하는 이서는 마치 다른 사람인 듯 매우 다르다.
+대체 서이서는 어떤 사람이었을까. 세영이 혼란스러워 할 때쯤
+
+진짜 서이서가 사진전에 찾아오는데...`,
     awardsList: [
+      '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트',
       '프로젝트 백백백',
       '한국영상자료원 상영'
     ],
@@ -304,6 +331,15 @@ export const PROJECTS: Project[] = [
     awardsList: [
       '제 5회 금천패션영화제 경쟁작',
       '제 3회 죽서 AI 영화제 장려상 수상'
+    ],
+    stillPhotos: [
+      'https://drive.google.com/file/d/18XM-ALuwdvh2NpLgHBSCMHolS9Gw8T_j/view?usp=sharing',
+      'https://drive.google.com/file/d/1t0EOxG8aDXmB0VoJkknUiGOhSTC4NplN/view?usp=sharing',
+      'https://drive.google.com/file/d/1sd_kDTynjDFmxLA3D-gca2Gepxtw7eh-/view?usp=sharing',
+      'https://drive.google.com/file/d/150kMS3XEJs5zYT1tq0cJZgvSkm1xa7zo/view?usp=sharing',
+      'https://drive.google.com/file/d/1gOMlDTNqNwf7GOvtH9z69dgUIZp4Qa77/view?usp=sharing',
+      'https://drive.google.com/file/d/1ThTRT9esldS8L8aeTzd-Zz-FOq9kWqkm/view?usp=sharing',
+      'https://drive.google.com/file/d/1M_QaLkcfvPrS2nxfNRD8MVimuirUCXEm/view?usp=sharing'
     ]
   },
   {
@@ -372,15 +408,24 @@ export const PROJECTS: Project[] = [
     runtime: '63min 47sec',
     aspectRatio: '2.35:1',
     posterUrl: 'https://drive.google.com/file/d/1deNl-oHGpSjmVxd5CbFZovAMTsyAFLPm/view?usp=share_link',
-    description: "백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트",
-    synopsis: `해변에서 녹색 페인트를 뒤집어쓰고 실종된 의문의 여자 '서이서' 
-세영은 해변에서 그녀가 버린 필름을 우연히 발견한다. 
-그리고 그녀의 존재가 궁금해진 세영은 이서를 찾기 위해 필름 안에 들어 있던 사진들을 전시하기로 결심한다.
- 세영은 사진전에 찾아온 이서의 전 애인 동우와 절친 해주를 인터뷰하며 이서가 어떤 사람이었을지를 묻는다. 
-그런데 동우와 해주가 회상하는 이서는 마치 다른 person인 듯 매우 다르다.
- 대체 서이서는 어떤 사람이었을까. 
-세영이 혼란스러워 할 때쯤 진짜 서이서가 사진전에 찾아오는데...`,
+    description: `"우리도 그린스크린처럼\n‘나’라는 역할에서 벗어나, 무한한 가능성을 가질 순 없는 걸까."`,
+    synopsis: `해변에서 녹색 페인트를 뒤집어쓰고 실종된 의문의 여자 
+
+'서이서'
+
+세영은 해변에서 그녀가 버린 필름을 우연히 발견한다.
+그리고 그녀의 존재가 궁금해진 세영은 이서를 찾기 위해 
+필름 안에 들어 있던 사진들을 전시하기로 결심한다.
+
+세영은 사진전에 찾아온 이서의 전 애인 동우와 절친 해주를 인터뷰하며 
+이서가 어떤 사람이었을지를 묻는다.
+
+그런데 동우와 해주가 회상하는 이서는 마치 다른 사람인 듯 매우 다르다.
+대체 서이서는 어떤 사람이었을까. 세영이 혼란스러워 할 때쯤
+
+진짜 서이서가 사진전에 찾아오는데...`,
     awardsList: [
+      '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트',
       '프로젝트 백백백',
       '한국영상자료원 상영'
     ],
@@ -408,7 +453,19 @@ export const PROJECTS: Project[] = [
     runtime: '7min 26sec',
     aspectRatio: '4:3',
     posterUrl: 'https://drive.google.com/file/d/1yLEA0j6ZZ_Yxz_8GsZe6rKsL9PcItj7-/view?usp=share_link',
-    synopsis: '사라짐을 기억하는 사라지는 ㅁ'
+    synopsis: '사라짐을 기억하는 사라지는 ㅁ',
+    stillPhotos: [
+      'https://drive.google.com/file/d/1J82c1X7klc3qhCayvAOEvKip9uBOkZYG/view?usp=sharing',
+      'https://drive.google.com/file/d/1queA_vmlfHckgl5PQANtqJQdij-2Mwj9/view?usp=sharing',
+      'https://drive.google.com/file/d/1i_haSqkTWJqMu1n6zHQESqJiFC5rWmsV/view?usp=sharing',
+      'https://drive.google.com/file/d/1g4gyDBHhopuFd0c2RDKE2cY7HrnrJIE_/view?usp=sharing',
+      'https://drive.google.com/file/d/1JXC1N4T5xqgJprQisQPXK5HT1EJNE_Aj/view?usp=sharing',
+      'https://drive.google.com/file/d/18qED5THl_86bFsCVYw4Wu_7bdOtWlhgQ/view?usp=sharing',
+      'https://drive.google.com/file/d/1SxNFkS0a_MDHJYWjV1l4sq3SJQ60DHAG/view?usp=sharing',
+      'https://drive.google.com/file/d/1d3muENUYwzmlCUXSCtb7wwyvRocOGR5U/view?usp=sharing',
+      'https://drive.google.com/file/d/1MvyBU4lfjpeYTyDZC9stPFRmdWZFzq3j/view?usp=sharing',
+      'https://drive.google.com/file/d/1OIEfMrhqSnW3nKvpxVuf5tcNhVY0poht/view?usp=sharing'
+    ]
   },
   {
     id: 'c2',
@@ -424,6 +481,18 @@ export const PROJECTS: Project[] = [
     awardsList: [
       '제 28회 부천국제판타스틱영화제 단편경쟁',
       '제 23회 피렌체한국영화제 Shorts부문 상영작'
+    ],
+    stillPhotos: [
+      'https://drive.google.com/file/d/1sug-Faa5rQb53mJYbiYTfkaBxzcF4xd-/view?usp=sharing',
+      'https://drive.google.com/file/d/1o24gd3HPVWBfKrYW2RERc8cJ-81wPJIY/view?usp=sharing',
+      'https://drive.google.com/file/d/1pWEZGMzlBDF2f2gPMw9Xcz2Z5ctYNziV/view?usp=sharing',
+      'https://drive.google.com/file/d/1fImMEISvFvldXpBgzKMVV0vQrUKTLFF5/view?usp=sharing',
+      'https://drive.google.com/file/d/1rbOrBBU8_uvJmyAlZL8XO5xZrcpOlvkw/view?usp=sharing',
+      'https://drive.google.com/file/d/1wqNuV1DXpZWgcjfnivSQoKQtP8wya-7g/view?usp=sharing',
+      'https://drive.google.com/file/d/1M77GL1c_QeYEt05rP7pRf7pqZpGgFc9Q/view?usp=sharing',
+      'https://drive.google.com/file/d/1guf88sC5cszQCVth-Iwskyo_Wh2fJtqi/view?usp=sharing',
+      'https://drive.google.com/file/d/1sVre5Q--fjslhCaSCIcXFkT6LyuCvxlg/view?usp=sharing',
+      'https://drive.google.com/file/d/1ZFOpsKvSZFQK5WGBn-tJOHwohgVFJJ55/view?usp=sharing'
     ]
   },
   {
@@ -439,6 +508,22 @@ export const PROJECTS: Project[] = [
     synopsis: '바깥의 소리로부터 멀어지고 싶었던 지온이 해수를 만나게 되면서, 진정으로 필요한 소리에 대해 깨닫게 되는 이야기',
     awardsList: [
       '2025 완주 아동권리영화제 우수상 수상'
+    ],
+    stillPhotos: [
+      'https://drive.google.com/file/d/14Jj_hWypFUk5fOFsPDbv3csb5Cbq4Lz9/view?usp=sharing',
+      'https://drive.google.com/file/d/1IRnOBLbKst1RcU89mOOroesiefTQ1LNX/view?usp=sharing',
+      'https://drive.google.com/file/d/1Ga9lXJTLbQ2y68D84G6jbiryptQma1iT/view?usp=sharing',
+      'https://drive.google.com/file/d/1hLw74mhK5pcyAvBBjd8zmFLJSaxO026r/view?usp=sharing',
+      'https://drive.google.com/file/d/1SN5XzjwRD423pNuJFegN4mBT1xGxUWEA/view?usp=sharing',
+      'https://drive.google.com/file/d/1AscmxP2fYl36A-DX5l_MN_IwennQCBM4/view?usp=sharing',
+      'https://drive.google.com/file/d/1wy8HdXrWEkTC37PlXsPHI9qfExJ3owvC/view?usp=sharing',
+      'https://drive.google.com/file/d/1-hyRB2-eCdfQOEPiValNEWEdAZlV0eou/view?usp=sharing',
+      'https://drive.google.com/file/d/1zD21xpkFcN7U2UpEmheulKxQFBd6JyA9/view?usp=sharing',
+      'https://drive.google.com/file/d/1W7VCC5MmtATiwOuL0w0QZHy1obTJK_Bb/view?usp=sharing',
+      'https://drive.google.com/file/d/1IjVTVEkvCY2CEQ7BAQ7CZEYdxsuqP_PQ/view?usp=sharing',
+      'https://drive.google.com/file/d/16yiJe2xHCIRY1-xhLI5zTRS-VlIUDIBM/view?usp=sharing',
+      'https://drive.google.com/file/d/15RdUbWJ3OR-q2kG85T9VjpPOUAxi-pdJ/view?usp=sharing',
+      'https://drive.google.com/file/d/1vtzGnO43k2Dk6e2IDg2eDsgrtYoIwAvQ/view?usp=sharing'
     ]
   },
   {
@@ -451,7 +536,16 @@ export const PROJECTS: Project[] = [
     runtime: '3min 46sec',
     aspectRatio: '2.35:1',
     posterUrl: 'https://drive.google.com/file/d/1kDLa4Rcl67_PZpmwZFKBtpcNQR9r8aPt/view?usp=share_link',
-    synopsis: 'MAN IN DRESS'
+    synopsis: 'MAN IN DRESS',
+    stillPhotos: [
+      'https://drive.google.com/file/d/1rbf2t_TRe_PySb40vfdmBGNPYNJthnxP/view?usp=sharing',
+      'https://drive.google.com/file/d/14TICZe2yvLCdHCM_j0Jv8X6INEHTOQMq/view?usp=sharing',
+      'https://drive.google.com/file/d/11co9Izsyy8gJvsT5lOhz5X90WeVtrqhF/view?usp=sharing',
+      'https://drive.google.com/file/d/1KwpLGyZkllRRR79rtK8DBfQo1T8kuB2z/view?usp=sharing',
+      'https://drive.google.com/file/d/1_-qrRcHC677_kOKHXc7bE-RiSXK8oCVP/view?usp=sharing',
+      'https://drive.google.com/file/d/1J_xa48r2OVOEdFyVAOY1w8pIwEaXM0Bm/view?usp=sharing',
+      'https://drive.google.com/file/d/1zmT3O4SrDRE6dXqwXLwapyJjgg2PnwQU/view?usp=sharing'
+    ]
   },
 
   // --- COMMERCIAL ---

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { DIRECTOR_INFO } from '../data';
@@ -24,7 +23,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="text-xl font-serif font-bold tracking-widest text-white uppercase">
-              {DIRECTOR_INFO.nameEn}<span className="text-yellow-500">.</span>
+              GEON's FLIM<span className="text-yellow-500">.</span>
             </Link>
           </div>
 
