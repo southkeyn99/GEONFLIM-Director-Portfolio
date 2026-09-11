@@ -25,12 +25,31 @@ export const DIRECTOR_INFO = {
 export const PROJECTS: Project[] = [
   // --- DIRECTING ---
   {
+    id: 'd12',
+    category: ProjectCategory.DIRECTING,
+    title: '유서 파이널 최종',
+    titleEn: 'The Last Letter : final final',
+    year: '2026',
+    role: 'Director / Writer',
+    genre: 'Black Comedy',
+    runtime: '12min 51sec',
+    posterUrl: 'https://drive.google.com/file/d/1AyMsoQZoAKnIG3zZIWEY4vngCHZoczkx/view?usp=sharing',
+    synopsis: `자살을 결심한 작가, 죽기 전 마지막으로 유서를 쓰려는데 첫 문장부터 마음에 들지 않는다. 고치고 또 고치고... 끝없이 유서를 퇴고하게 되는데...`,
+    awardsList: [
+      '배우의 감독 프로젝트 시즌 2 제작지원작',
+      '제 6회 머내마을영화제 청년 감독 부문',
+      '제15회 프랑크푸르트 한국영화제(독일)',
+      '제 16회 충무로단편독립영화제 단편부문 수상'
+    ],
+    stillPhotos: []
+  },
+  {
     id: 'd11',
     category: ProjectCategory.DIRECTING,
     title: '문',
     titleEn: 'The Final Visit',
     year: '2026',
-    role: 'Director',
+    role: 'Director / Writer',
     genre: 'Drama, thriller',
     runtime: '7min 15sec',
     posterUrl: 'https://drive.google.com/file/d/1Iemho3BGtdzB8KUPi6p21Zg1cHfda6MR/view?usp=sharing',

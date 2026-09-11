@@ -54,7 +54,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   <img 
                     src={formatImageUrl(project.posterUrl)} 
                     alt={project.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : project.title === '문' ? 'object-left' : ''}`}
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : project.title === '문' ? 'object-[33.3%_center]' : ''}`}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[10px] tracking-widest text-neutral-700 font-serif italic">
@@ -71,6 +71,33 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                 )}
 
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+
+                {/* Hover Overlay: Synopsis & Basic Info */}
+                {!isCommercial && (
+                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-6 md:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm pointer-events-none">
+                    <div className="space-y-5 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 font-sans">
+                      <div className="space-y-2">
+                        <p className="text-[9px] text-yellow-500 uppercase tracking-[0.3em] font-black">Information</p>
+                        <div className="flex flex-col gap-1">
+                          <p className="text-white text-[11px] md:text-xs font-bold tracking-tight uppercase">
+                            {project.genre || 'Drama'}
+                          </p>
+                          <p className="text-neutral-400 text-[10px] md:text-[11px] tracking-widest font-medium uppercase">
+                            {project.runtime || 'N/A'}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="w-6 h-[1px] bg-white/20 mx-auto"></div>
+                      
+                      {project.synopsis && (
+                        <p className="text-neutral-200 text-[11px] md:text-[12px] leading-relaxed line-clamp-8 font-normal break-keep">
+                          {project.synopsis}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* 정보 영역: 제목 아래 역할 및 수상 정보 추가 */}
@@ -98,11 +125,15 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   </p>
                   
                   {project.awardsList && project.awardsList.length > 0 && (
-                    <div className="flex items-start gap-2 pt-2 border-t border-white/5">
-                      <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
-                      <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
-                        {project.awardsList[0]}
-                      </p>
+                    <div className="space-y-1.5 pt-2 border-t border-white/5">
+                      {project.awardsList.slice(0, 3).map((award, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
+                          <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
+                            {award}
+                          </p>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -129,7 +160,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   {selectedProject.posterUrl ? (
                     <img 
                       src={formatImageUrl(selectedProject.posterUrl)} 
-                      className={`w-full h-full object-cover ${selectedProject.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : selectedProject.title === '문' ? 'object-left' : ''}`}
+                      className={`w-full h-full object-cover ${selectedProject.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : selectedProject.title === '문' ? 'object-[33.3%_center]' : ''}`}
                       alt={selectedProject.title}
                     />
                   ) : (
@@ -224,8 +255,8 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   ))
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 opacity-10">
-                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">Frame_Alpha</div>
-                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">Frame_Beta</div>
+                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">COMING SOON</div>
+                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">COMING SOON</div>
                   </div>
                 )}
               </div>
