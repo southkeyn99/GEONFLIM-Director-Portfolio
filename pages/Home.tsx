@@ -108,7 +108,7 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
             {director.nameEn.split(' ')[0]} <br /> {director.nameEn.split(' ')[1]}
           </h1>
 
-          {/* New Navigation Buttons */}
+          {/* Navigation Buttons - Minimalist Border Style */}
           <div className="flex flex-wrap justify-center gap-4 mb-10 md:mb-14">
             <Link 
               to="/directing" 
@@ -247,6 +247,22 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
             </div>
         </div>
       </section>
+
+      {/* Persistent Floating Film Portfolio Link */}
+      <div className="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-[50]">
+        <Link 
+          to="/directing"
+          className="group relative flex items-center justify-center"
+        >
+          {/* Pulsing Aura */}
+          <div className="absolute inset-0 rounded-full bg-yellow-500/20 animate-ping opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          
+          <div className="bg-yellow-500 hover:bg-white text-black px-6 md:px-8 py-3 rounded-full shadow-[0_10px_40px_rgba(234,179,8,0.4)] transition-all duration-500 flex items-center gap-3">
+            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-black whitespace-nowrap">Film Portfolio</span>
+            <i className="fas fa-film text-[10px] md:text-[12px]"></i>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };
