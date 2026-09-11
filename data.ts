@@ -25,6 +25,32 @@ export const DIRECTOR_INFO = {
 export const PROJECTS: Project[] = [
   // --- DIRECTING ---
   {
+    id: 'd11',
+    category: ProjectCategory.DIRECTING,
+    title: '문',
+    titleEn: 'The Final Visit',
+    year: '2026',
+    role: 'Director',
+    genre: 'Drama, thriller',
+    runtime: '7min 15sec',
+    posterUrl: 'https://drive.google.com/file/d/1Iemho3BGtdzB8KUPi6p21Zg1cHfda6MR/view?usp=sharing',
+    synopsis: `특별 지시로 안부 확인에 나선 복지 공무원 선우는 대상자 은규를 찾아간다. 반복되는 방문에도 문을 열어주지 않자, 선우는 끝내 창문을 통해 안으로 들어가는데…`,
+    awardsList: [
+      'Canon Cinema Camp 1기 작품',
+      '제작지원 캐논코리아'
+    ],
+    stillPhotos: [
+      'https://drive.google.com/file/d/1Hf6NNVK1mdS1itlp-vJrDg_7mtI6mGuI/view?usp=sharing',
+      'https://drive.google.com/file/d/1t8fuxmyuZ5e72Lwj8WWn6T3TmSUG6czF/view?usp=sharing',
+      'https://drive.google.com/file/d/1RUVMvHDIJ91wnQeEJMCF5S4yyJ5KpP3Y/view?usp=sharing',
+      'https://drive.google.com/file/d/1Pw-lXJDbFwQ53yrPWw03T4CKCVuJvHxi/view?usp=sharing',
+      'https://drive.google.com/file/d/1Iemho3BGtdzB8KUPi6p21Zg1cHfda6MR/view?usp=sharing',
+      'https://drive.google.com/file/d/1MzrE5Zjs3i4EyqIjMhUNNiOtF7d8HGo4/view?usp=sharing',
+      'https://drive.google.com/file/d/1WJNZmkA2IHRdvk9zmiwpxyd1KdSZUXwe/view?usp=sharing',
+      'https://drive.google.com/file/d/1zUd4Mtifpsa9f-BrlN7BxDMAUVSSTQ9m/view?usp=sharing'
+    ]
+  },
+  {
     id: 'd1',
     category: ProjectCategory.DIRECTING,
     title: '아부지',
@@ -38,10 +64,14 @@ export const PROJECTS: Project[] = [
     synopsis: `어릴적 아버지의 폭력으로 집을 나온 이후, 공황장애를 얻게 된 현수. 
 20년만에 누나의 부탁으로 치매에 걸린 아버지를 돌보게 된다.`,
     awardsList: [
-      '2026 유바리국제판타스틱영화제 국제단편경쟁',
-      '제 4회 경기도예술영화제 대상',
       '24년 명필름 단편스쿨 수료작',
-      '제 3회 UFO 영화제 초청상영'
+      '제 3회 UFO 영화제 초청상영',
+      '제 4회 경기도예술영화제 대상',
+      '2026 팔마·바사스 국제 단편 영화제 U-NEXT SELECTION',
+      '제 36회 유바리국제판타스틱영화제 국제단편경쟁',
+      '제 13회 목포국도1호선독립영화제 단편경쟁',
+      '나스 쇼트 필름페스티벌-나스어워드 2026',
+      '제18회 후쿠오카 인디펜던트 영화제 2026 경쟁 부문 (배우상 노미네이트)'
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1UQ7MLFAol5oGzx194FkiwXu9iDBbgU8D/view?usp=sharing',

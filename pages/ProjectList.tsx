@@ -54,7 +54,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   <img 
                     src={formatImageUrl(project.posterUrl)} 
                     alt={project.title}
-                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : ''}`}
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : project.title === '문' ? 'object-left' : ''}`}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[10px] tracking-widest text-neutral-700 font-serif italic">
@@ -129,7 +129,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   {selectedProject.posterUrl ? (
                     <img 
                       src={formatImageUrl(selectedProject.posterUrl)} 
-                      className={`w-full h-full object-cover ${selectedProject.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : ''}`}
+                      className={`w-full h-full object-cover ${selectedProject.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : selectedProject.title === '문' ? 'object-left' : ''}`}
                       alt={selectedProject.title}
                     />
                   ) : (
