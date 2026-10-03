@@ -116,30 +116,27 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
     <div className="bg-black">
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-black flex items-center justify-center overflow-hidden">
-          {/* 2.35:1 Anamorphic Widescreen Container */}
-          <div 
-            className="w-full aspect-[2.35/1] relative overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)]"
-            style={{ aspectRatio: '2.35 / 1' }}
-          >
-            {/* Background Image (7th still photo) */}
+        <div className="absolute inset-0 z-0 bg-black overflow-hidden">
+          {/* Full Hero Background Container (Reverted to original uncropped full ratio) */}
+          <div className="w-full h-full relative [mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)]">
+            {/* Background Image (7th still photo) - Brightened for enhanced visibility */}
             <img 
               src={formatImageUrl("https://drive.google.com/file/d/1SZ5dJVlaoT9ORM5ejdyHc3F9_8ZfBdD8/view?usp=sharing")} 
               alt="Hero Background" 
               onError={(e) => {
                 e.currentTarget.src = '/images/the_last_letter_7.jpg';
               }}
-              className="w-full h-full object-cover object-center opacity-95 brightness-110 contrast-[1.05]"
+              className="w-full h-full object-cover object-center opacity-100 brightness-125 contrast-[1.08]"
             />
 
-            {/* Inner soft top and bottom natural edge feathering */}
-            <div className="absolute inset-x-0 top-0 h-16 md:h-24 bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none"></div>
-            <div className="absolute inset-x-0 bottom-0 h-16 md:h-24 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
+            {/* Natural top and bottom edge blending */}
+            <div className="absolute inset-x-0 top-0 h-24 md:h-36 bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-x-0 bottom-0 h-28 md:h-44 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
           </div>
 
           {/* Subtle cinematic vignette */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none"></div>
-          <div className="absolute inset-0 bg-black/25 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-black/15 pointer-events-none"></div>
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-5xl">
