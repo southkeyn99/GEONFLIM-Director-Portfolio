@@ -39,9 +39,26 @@ export const PROJECTS: Project[] = [
       '배우의 감독 프로젝트 시즌 2 제작지원작',
       '제 6회 머내마을영화제 청년 감독 부문',
       '제15회 프랑크푸르트 한국영화제(독일)',
-      '제 16회 충무로단편독립영화제 단편부문 수상'
+      '제 16회 충무로단편독립영화제 편집상'
     ],
-    stillPhotos: []
+    stillPhotos: [
+      'https://drive.google.com/file/d/1-8XJgZIOnQHsky-5TAwRghaRC6bp4mRt/view?usp=sharing',
+      'https://drive.google.com/file/d/1bc2QJrM3s8F4G9SuyHiMJu9zHM3OkkxH/view?usp=sharing',
+      'https://drive.google.com/file/d/1Z58p0X_HMefcH7tmHt4m7wj_vaoyFl8G/view?usp=sharing',
+      'https://drive.google.com/file/d/1TKvhuBTlB5JVt7Z3MlxAknzzh2d1B7qC/view?usp=sharing',
+      'https://drive.google.com/file/d/1AtYprumnbUSYYqYeMUS1aKImKiSB2qIH/view?usp=sharing',
+      'https://drive.google.com/file/d/1uX-u4o7GpDQbt30xRu9hj-QQfeGPudFG/view?usp=sharing',
+      'https://drive.google.com/file/d/1SZ5dJVlaoT9ORM5ejdyHc3F9_8ZfBdD8/view?usp=sharing',
+      'https://drive.google.com/file/d/1PlNH3v6loKxAWNHQpSXo1We5EC5zcFFZ/view?usp=sharing',
+      'https://drive.google.com/file/d/1mTRN2aOWQ4AJYdVWCHGIKRJS_lLVUfEs/view?usp=sharing',
+      'https://drive.google.com/file/d/1F1dORWj-y3VORd1pwE1ELxlaW8RemG2Y/view?usp=sharing',
+      'https://drive.google.com/file/d/12AU8hl-H7XzXZV9WWQCmjOe84jsfScCg/view?usp=sharing',
+      'https://drive.google.com/file/d/14agxTHGnd__W4qJe2bjm2S4X0s1FKVKm/view?usp=sharing',
+      'https://drive.google.com/file/d/1YEHDe1cL1pDG4jghbvo_dSl7gZUoiJ_u/view?usp=sharing',
+      'https://drive.google.com/file/d/1Fv9l5fvCRK16hYwApIM9bRYsB9YTXz-R/view?usp=sharing',
+      'https://drive.google.com/file/d/1VBihTkPyUCtZHFjxIq0SU3FObiCzBTuu/view?usp=sharing',
+      'https://drive.google.com/file/d/1XbK1ekg7BnAcuOPUE1rMXooabrgEZID9/view?usp=sharing'
+    ]
   },
   {
     id: 'd11',

@@ -1,8 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Project, ProjectCategory } from '../types';
 import { DIRECTOR_INFO } from '../data';
 import { formatImageUrl } from '../utils/imageHelper';
+import ProjectDetailModal from '../components/ProjectDetailModal';
 
 interface ProjectListProps {
   category: ProjectCategory;
@@ -10,22 +12,38 @@ interface ProjectListProps {
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const filteredProjects = projects.filter(p => p.category === category);
   
   const displayProjects = filteredProjects; 
   const isCommercial = category === ProjectCategory.COMMERCIAL;
 
-  const formatText = (str: string | undefined) => {
-    if (!str) return '';
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
+  useEffect(() => {
+    const projectId = searchParams.get('project');
+    if (projectId) {
+      const found = projects.find(p => p.id === projectId);
+      if (found) {
+        setSelectedProject(found);
+      }
+    } else {
+      setSelectedProject(null);
+    }
+  }, [searchParams, projects]);
 
   const handleProjectClick = (project: Project) => {
     if (isCommercial) {
       window.open(project.link || DIRECTOR_INFO.adPortfolio, '_blank');
     } else {
-      setSelectedProject(project);
+      setSearchParams({ project: project.id });
+    }
+  };
+
+  const handleCloseModal = () => {
+    if (searchParams.has('project')) {
+      window.history.back();
+    } else {
+      setSelectedProject(null);
     }
   };
 
@@ -54,6 +72,11 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   <img 
                     src={formatImageUrl(project.posterUrl)} 
                     alt={project.title}
+                    onError={(e) => {
+                      if (project.title === '유서 파이널 최종') {
+                        e.currentTarget.src = '/images/the_last_letter_poster.jpg';
+                      }
+                    }}
                     className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : project.title === '문' ? 'object-[33.3%_center]' : ''}`}
                   />
                 ) : (
@@ -143,140 +166,12 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
         </div>
       </div>
 
-      {/* 영화 상세 정보 모달 (기존 디자인 절대 유지) */}
-      {!isCommercial && selectedProject && (
-        <div className="fixed inset-0 z-[100] bg-black overflow-y-auto custom-scrollbar flex flex-col items-center">
-          <button 
-            className="fixed top-8 right-8 md:top-12 md:right-12 z-[120] text-neutral-700 hover:text-white transition-all p-3 group" 
-            onClick={() => setSelectedProject(null)}
-          >
-            <i className="fas fa-times text-2xl group-hover:rotate-90 transition-transform duration-300"></i>
-          </button>
-
-          <div className="w-full max-w-7xl px-6 md:px-12 pt-24 md:pt-48 pb-24 mx-auto">
-            <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-48 relative items-start justify-center">
-              <div className="w-full lg:w-[400px] flex-shrink-0 lg:sticky lg:top-32 h-fit space-y-10">
-                <div className="aspect-[3/4.2] overflow-hidden bg-neutral-950 border border-white/5 shadow-2xl relative">
-                  {selectedProject.posterUrl ? (
-                    <img 
-                      src={formatImageUrl(selectedProject.posterUrl)} 
-                      className={`w-full h-full object-cover ${selectedProject.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : selectedProject.title === '문' ? 'object-[33.3%_center]' : ''}`}
-                      alt={selectedProject.title}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-neutral-800 text-[10px] tracking-[0.5em] uppercase italic opacity-30">Cinematic Archive</div>
-                  )}
-                </div>
-
-                <div className="border-t border-white/10">
-                  {[
-                    { label: 'Year', value: selectedProject.year },
-                    { label: 'Genre', value: formatText(selectedProject.genre) || 'Drama' },
-                    { label: 'Runtime', value: formatText(selectedProject.runtime) || 'N/a' },
-                    { label: 'Role', value: selectedProject.role }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center py-4 border-b border-white/5">
-                      <span className="text-[9px] uppercase tracking-[0.2em] text-neutral-500 font-bold">{item.label}</span>
-                      <span className="text-[12px] font-bold text-neutral-200 tracking-tight">{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex-grow space-y-24 max-w-2xl">
-                <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl lg:text-7xl font-serif text-white tracking-tight leading-[1.1] uppercase break-keep">
-                    {selectedProject.title}
-                  </h2>
-                  {selectedProject.titleEn && (
-                    <p className="text-neutral-500 font-serif text-xl md:text-2xl italic opacity-40">
-                      {selectedProject.titleEn}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6">
-                    <div className="w-10 h-px bg-yellow-600/40"></div>
-                    <h3 className="text-[10px] uppercase tracking-[0.5em] text-yellow-600 font-black">Synopsis</h3>
-                  </div>
-                  <p className="text-neutral-300 text-[15px] md:text-[17px] leading-[1.8] tracking-normal font-normal break-keep whitespace-pre-line opacity-90">
-                    {selectedProject.synopsis || "작품의 기록이 준비 중입니다."}
-                  </p>
-                </div>
-
-                {selectedProject.description && (
-                  <div className="space-y-8">
-                    <div className="flex items-center gap-6">
-                      <div className="w-10 h-px bg-yellow-600/40"></div>
-                      <h3 className="text-[10px] uppercase tracking-[0.5em] text-yellow-600 font-black">Planning Intention</h3>
-                    </div>
-                    <p className="text-white text-[15px] md:text-[17px] font-serif italic leading-[1.8] tracking-tight break-keep whitespace-pre-line opacity-100">
-                      {selectedProject.description}
-                    </p>
-                  </div>
-                )}
-
-                {selectedProject.awardsList && selectedProject.awardsList.length > 0 && (
-                  <div className="space-y-10">
-                    <div className="flex items-center gap-6">
-                      <div className="w-10 h-px bg-yellow-600/40"></div>
-                      <h3 className="text-[10px] uppercase tracking-[0.5em] text-yellow-600 font-black">Recognition</h3>
-                    </div>
-                    <ul className="space-y-5">
-                      {selectedProject.awardsList.map((award, i) => (
-                        <li key={i} className="flex items-start gap-5 text-neutral-400 text-base md:text-lg font-light group">
-                          <span className="w-1.5 h-1.5 rounded-full bg-neutral-600 mt-2.5 group-hover:bg-neutral-400 transition-colors"></span>
-                          <span className="group-hover:text-white transition-colors duration-300 leading-snug">{award}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-16 border-t border-white/5 pt-40">
-              <div className="flex flex-col items-center gap-10 mb-16">
-                 <h3 className="text-[10px] uppercase tracking-[1em] text-neutral-700 font-black">Cinematic Frames</h3>
-                 <div className="w-px h-24 bg-gradient-to-b from-white/10 to-transparent"></div>
-              </div>
-              
-              <div className="space-y-16 md:space-y-32">
-                {selectedProject.stillPhotos && selectedProject.stillPhotos.length > 0 ? (
-                  selectedProject.stillPhotos.map((photo, i) => (
-                    <div key={i} className="w-full bg-neutral-900 overflow-hidden shadow-2xl group border border-white/5">
-                      <img 
-                        src={formatImageUrl(photo)} 
-                        className="w-full h-auto block transition-all duration-1000 group-hover:scale-[1.01]"
-                        alt={`Scene Frame ${i + 1}`}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 opacity-10">
-                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">COMING SOON</div>
-                     <div className="aspect-video bg-neutral-950 border border-white/5 flex items-center justify-center font-mono text-[9px] tracking-widest uppercase italic">COMING SOON</div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="pt-64 pb-32 flex flex-col items-center justify-center">
-               <button 
-                  onClick={() => setSelectedProject(null)}
-                  className="group flex flex-col items-center gap-6 text-neutral-700 hover:text-white transition-all duration-700"
-               >
-                  <div className="flex flex-col items-center gap-2">
-                    <i className="fas fa-chevron-up text-[10px] group-hover:-translate-y-2 transition-transform"></i>
-                    <i className="fas fa-chevron-up text-[8px] opacity-30 group-hover:-translate-y-2 transition-transform delay-75"></i>
-                  </div>
-                  <span className="text-[10px] uppercase tracking-[0.8em] font-bold">Back to Gallery</span>
-               </button>
-            </div>
-
-          </div>
-        </div>
+      {/* 영화 상세 정보 모달 */}
+      {!isCommercial && (
+        <ProjectDetailModal 
+          project={selectedProject} 
+          onClose={handleCloseModal} 
+        />
       )}
     </div>
   );

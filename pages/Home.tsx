@@ -1,8 +1,9 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Project, DirectorInfo, ProjectCategory } from '../types';
 import { formatImageUrl } from '../utils/imageHelper';
+import ProjectDetailModal from '../components/ProjectDetailModal';
 
 interface HomeProps {
   projects: Project[];
@@ -10,6 +11,39 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ projects, director }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    const projectId = searchParams.get('project');
+    if (projectId) {
+      const found = projects.find(p => p.id === projectId);
+      if (found) {
+        setSelectedProject(found);
+      }
+    } else {
+      setSelectedProject(null);
+    }
+  }, [searchParams, projects]);
+
+  const handleMovieClick = (project: Project) => {
+    setSearchParams({ project: project.id });
+  };
+
+  const handleCloseModal = () => {
+    if (searchParams.has('project')) {
+      window.history.back();
+    } else {
+      setSelectedProject(null);
+    }
+  };
+
+  // 히어로 화면 아래 3개 작품: 유서파이널최종, 아부지, 도애의 시간
+  const targetTitles = ['유서 파이널 최종', '아부지', '도애의 시간'];
+  const directingProjects = targetTitles
+    .map(title => projects.find(p => p.title.replace(/\s+/g, '') === title.replace(/\s+/g, '')))
+    .filter((p): p is Project => p !== undefined);
+
   const renderResumeCategory = (category: ProjectCategory, title: string) => {
     const filtered = projects.filter(p => p.category === category);
     
@@ -82,57 +116,215 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
     <div className="bg-black">
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-black">
-          {/* Desktop/Tablet Background Image - Kept object-contain for full visibility */}
-          <img 
-            src={formatImageUrl("https://drive.google.com/file/d/1c4YXXdzakITg8GMGkBe7Y366LSCK2c3r/view?usp=sharing")} 
-            alt="Hero Background Desktop" 
-            className="hidden md:block w-full h-full object-contain opacity-80"
-          />
-          {/* Mobile Background Image - Reverted to object-cover with specific centering */}
-          <img 
-            src={formatImageUrl("https://drive.google.com/file/d/1_fdg9qMJjNKVYSf45J0umlAC4qJ5cYVO/view?usp=sharing")} 
-            alt="Hero Background Mobile" 
-            className="block md:hidden w-full h-full object-cover object-[33%_center] opacity-80"
-          />
-          {/* Vignette Overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_40%,rgba(0,0,0,0.5)_100%)] pointer-events-none"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none"></div>
+        <div className="absolute inset-0 z-0 bg-black flex items-center justify-center overflow-hidden">
+          {/* 2.35:1 Anamorphic Widescreen Container */}
+          <div 
+            className="w-full aspect-[2.35/1] relative overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)]"
+            style={{ aspectRatio: '2.35 / 1' }}
+          >
+            {/* Background Image (7th still photo) */}
+            <img 
+              src={formatImageUrl("https://drive.google.com/file/d/1SZ5dJVlaoT9ORM5ejdyHc3F9_8ZfBdD8/view?usp=sharing")} 
+              alt="Hero Background" 
+              onError={(e) => {
+                e.currentTarget.src = '/images/the_last_letter_7.jpg';
+              }}
+              className="w-full h-full object-cover object-center opacity-95 brightness-110 contrast-[1.05]"
+            />
+
+            {/* Inner soft top and bottom natural edge feathering */}
+            <div className="absolute inset-x-0 top-0 h-16 md:h-24 bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-x-0 bottom-0 h-16 md:h-24 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
+          </div>
+
+          {/* Subtle cinematic vignette */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-black/25 pointer-events-none"></div>
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-5xl">
-          <p className="text-yellow-500 uppercase tracking-[0.6em] md:tracking-[0.8em] text-[10px] md:text-xs mb-8 md:mb-12 font-black drop-shadow-md">
-            {director.title}
-          </p>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-serif font-bold text-white mb-8 md:mb-10 tracking-tighter leading-[0.85] uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-            {director.nameEn.split(' ')[0]} <br /> {director.nameEn.split(' ')[1]}
+          {/* Eyebrow badge */}
+          <div className="inline-flex items-center justify-center gap-3 md:gap-4 mb-5 md:mb-7">
+            <span className="w-8 md:w-12 h-px bg-yellow-500/60"></span>
+            <p className="text-yellow-500 uppercase tracking-[0.5em] md:tracking-[0.7em] text-[10px] md:text-xs font-bold drop-shadow">
+              {director.title}
+            </p>
+            <span className="w-8 md:w-12 h-px bg-yellow-500/60"></span>
+          </div>
+
+          {/* Director Name in refined cinematic editorial serif */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-8 md:mb-12 tracking-[0.06em] md:tracking-[0.1em] uppercase leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+            {director.nameEn}
           </h1>
 
-          {/* Navigation Buttons - Minimalist Border Style */}
-          <div className="flex flex-wrap justify-center gap-4 mb-10 md:mb-14">
+          {/* Visual Storyteller Sub-element */}
+          <div className="flex items-center justify-center gap-6 md:gap-10 mb-9 md:mb-12">
+            <span className="h-px w-10 md:w-20 bg-white/30"></span>
+            <p className="text-white text-[10px] md:text-xs tracking-[0.5em] md:tracking-[0.7em] uppercase font-semibold whitespace-nowrap drop-shadow-lg">
+              Visual Storyteller
+            </p>
+            <span className="h-px w-10 md:w-20 bg-white/30"></span>
+          </div>
+
+          {/* Navigation Buttons - Elegant Cinema Festival Style */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             <Link 
               to="/directing" 
-              className="px-6 md:px-8 py-2.5 md:py-3 border border-white/30 bg-black/20 backdrop-blur-sm text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="px-7 md:px-9 py-3 border border-white/20 bg-black/40 backdrop-blur-md text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-neutral-200 hover:text-white hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300 shadow-xl"
             >
-              FILM PORTFOLIO
+              Film Portfolio
             </Link>
             <Link 
               to="/commercial" 
-              className="px-6 md:px-8 py-2.5 md:py-3 border border-white/30 bg-black/20 backdrop-blur-sm text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-white hover:bg-white hover:text-black transition-all duration-300"
+              className="px-7 md:px-9 py-3 border border-white/20 bg-black/40 backdrop-blur-md text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold text-neutral-200 hover:text-white hover:border-yellow-500 hover:bg-yellow-500/10 transition-all duration-300 shadow-xl"
             >
-              COMMERCIAL PORTFOLIO
+              Commercial Portfolio
             </Link>
-          </div>
-
-          <div className="flex items-center justify-center gap-6 md:gap-10">
-            <span className="h-px w-12 md:w-24 bg-white/40"></span>
-            <p className="text-white text-[10px] md:text-xs tracking-[0.5em] md:tracking-[0.7em] uppercase font-bold whitespace-nowrap drop-shadow-lg">Visual Storyteller</p>
-            <span className="h-px w-12 md:w-24 bg-white/40"></span>
           </div>
         </div>
         
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-          <i className="fas fa-chevron-down text-white text-xl"></i>
+        {/* Minimalist Editorial Scroll Indicator */}
+        <div 
+          className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer group opacity-60 hover:opacity-100 transition-all duration-500" 
+          onClick={() => document.getElementById('directing-preview')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-sans group-hover:text-yellow-500 transition-colors">
+            Scroll
+          </span>
+          <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent group-hover:from-yellow-500 transition-colors"></div>
+        </div>
+      </section>
+
+      {/* Directing Works Preview Section */}
+      <section id="directing-preview" className="py-24 md:py-36 px-6 bg-black border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6 border-b border-white/10 pb-8">
+            <div className="space-y-3">
+              <div className="flex items-center gap-4 text-yellow-500 font-black text-[10px] tracking-[0.5em] uppercase opacity-80">
+                <span className="w-10 h-px bg-yellow-500/50"></span>
+                Selected Works
+              </div>
+              <h2 className="text-3xl md:text-5xl font-serif text-white tracking-[0.15em] uppercase leading-tight">
+                Directing
+              </h2>
+            </div>
+            
+            <Link 
+              to="/directing" 
+              className="group inline-flex items-center gap-3 text-neutral-400 hover:text-yellow-500 text-xs tracking-[0.25em] uppercase font-bold transition-all duration-300"
+            >
+              <span>더보기</span>
+              <i className="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1.5 transition-transform duration-300"></i>
+            </Link>
+          </div>
+
+          {/* 3 Directing Projects Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-y-20">
+            {directingProjects.map((project) => (
+              <div 
+                key={project.id} 
+                onClick={() => handleMovieClick(project)}
+                className="group cursor-pointer flex flex-col space-y-6 block"
+              >
+                {/* 포스터 영역 */}
+                <div className="aspect-[2/3] overflow-hidden bg-neutral-900 border border-white/5 relative shadow-lg">
+                  {project.posterUrl ? (
+                    <img 
+                      src={formatImageUrl(project.posterUrl)} 
+                      alt={project.title}
+                      onError={(e) => {
+                        if (project.title === '유서 파이널 최종') {
+                          e.currentTarget.src = '/images/the_last_letter_poster.jpg';
+                        }
+                      }}
+                      className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${project.title === '노이즈캔슬링' ? 'object-[33.3%_center]' : project.title === '문' ? 'object-[33.3%_center]' : ''}`}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-[10px] tracking-widest text-neutral-700 font-serif italic">
+                      NO POSTER
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+
+                  {/* Hover Overlay: Synopsis & Basic Info */}
+                  <div className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center p-6 md:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-sm pointer-events-none">
+                    <div className="space-y-5 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 font-sans">
+                      <div className="space-y-2">
+                        <p className="text-[9px] text-yellow-500 uppercase tracking-[0.3em] font-black">Information</p>
+                        <div className="flex flex-col gap-1">
+                          <p className="text-white text-[11px] md:text-xs font-bold tracking-tight uppercase">
+                            {project.genre || 'Drama'}
+                          </p>
+                          <p className="text-neutral-400 text-[10px] md:text-[11px] tracking-widest font-medium uppercase">
+                            {project.runtime || 'N/A'}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="w-6 h-[1px] bg-white/20 mx-auto"></div>
+                      
+                      {project.synopsis && (
+                        <p className="text-neutral-200 text-[11px] md:text-[12px] leading-relaxed line-clamp-8 font-normal break-keep">
+                          {project.synopsis}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 정보 영역 */}
+                <div className="space-y-3">
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-baseline gap-4">
+                      <h3 className="text-lg md:text-xl font-serif text-white tracking-tight leading-tight flex-1 group-hover:text-yellow-500 transition-colors">
+                        {project.title}
+                      </h3>
+                      <span className="text-yellow-500 font-bold text-xs tracking-wider shrink-0">
+                        {project.year}
+                      </span>
+                    </div>
+                    {project.titleEn && (
+                      <p className="text-[10px] md:text-[11px] text-neutral-500 uppercase tracking-[0.2em] font-medium leading-none">
+                        {project.titleEn}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <p className="text-[9px] md:text-[10px] text-neutral-400 uppercase tracking-[0.1em] font-light">
+                      {project.role}
+                    </p>
+                    
+                    {project.awardsList && project.awardsList.length > 0 && (
+                      <div className="space-y-1.5 pt-2 border-t border-white/5">
+                        {project.awardsList.slice(0, 3).map((award, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
+                            <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
+                              {award}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom 더보기 Button */}
+          <div className="mt-16 md:mt-24 text-center">
+            <Link 
+              to="/directing" 
+              className="inline-flex items-center gap-4 px-8 md:px-10 py-3.5 md:py-4 border border-white/20 bg-neutral-950/80 hover:bg-white hover:text-black text-white text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-bold transition-all duration-300 shadow-lg"
+            >
+              <span>View More</span>
+              <i className="fas fa-arrow-right text-[10px]"></i>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -248,21 +440,11 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
         </div>
       </section>
 
-      {/* Persistent Floating Film Portfolio Link */}
-      <div className="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-[50]">
-        <Link 
-          to="/directing"
-          className="group relative flex items-center justify-center"
-        >
-          {/* Pulsing Aura */}
-          <div className="absolute inset-0 rounded-full bg-yellow-500/20 animate-ping opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          
-          <div className="bg-yellow-500 hover:bg-white text-black px-6 md:px-8 py-3 rounded-full shadow-[0_10px_40px_rgba(234,179,8,0.4)] transition-all duration-500 flex items-center gap-3">
-            <span className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-black whitespace-nowrap">Film Portfolio</span>
-            <i className="fas fa-film text-[10px] md:text-[12px]"></i>
-          </div>
-        </Link>
-      </div>
+      {/* 영화 상세 정보 모달 */}
+      <ProjectDetailModal 
+        project={selectedProject} 
+        onClose={handleCloseModal} 
+      />
     </div>
   );
 };
