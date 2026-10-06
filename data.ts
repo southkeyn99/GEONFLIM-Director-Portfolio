@@ -36,10 +36,11 @@ export const PROJECTS: Project[] = [
     posterUrl: 'https://drive.google.com/file/d/1AyMsoQZoAKnIG3zZIWEY4vngCHZoczkx/view?usp=sharing',
     synopsis: `자살을 결심한 작가, 죽기 전 마지막으로 유서를 쓰려는데 첫 문장부터 마음에 들지 않는다. 고치고 또 고치고... 끝없이 유서를 퇴고하게 되는데...`,
     awardsList: [
-      '배우의 감독 프로젝트 시즌 2 제작지원작',
-      '제 6회 머내마을영화제 청년 감독 부문',
-      '제15회 프랑크푸르트 한국영화제(독일)',
-      '제 16회 충무로단편독립영화제 편집상'
+      { text: '배우의 감독 프로젝트 시즌 2 제작지원작', link: 'https://www.instagram.com/p/DONatMpEab5/?img_index=1' },
+      { text: '제 6회 머내마을영화제 청년 감독 부문', link: 'https://www.instagram.com/p/DcBfLjVHaoq/?img_index=1' },
+      { text: '제15회 프랑크푸르트 한국영화제(독일)', link: 'https://www.instagram.com/p/Ddyc8jWCD2y/?img_index=2' },
+      { text: '제 16회 충무로단편독립영화제 편집상', link: 'https://m.cafe.daum.net/CYSFF/AOBf/546' },
+      { text: '샌딩유 우주비행 배급지원선정작', link: 'https://www.instagram.com/p/DYjpIBniYA-/?img_index=4' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1-8XJgZIOnQHsky-5TAwRghaRC6bp4mRt/view?usp=sharing',
@@ -100,14 +101,14 @@ export const PROJECTS: Project[] = [
     synopsis: `어릴적 아버지의 폭력으로 집을 나온 이후, 공황장애를 얻게 된 현수. 
 20년만에 누나의 부탁으로 치매에 걸린 아버지를 돌보게 된다.`,
     awardsList: [
-      '24년 명필름 단편스쿨 수료작',
-      '제 3회 UFO 영화제 초청상영',
-      '제 4회 경기도예술영화제 대상',
-      '2026 팔마·바사스 국제 단편 영화제 U-NEXT SELECTION',
-      '제 36회 유바리국제판타스틱영화제 국제단편경쟁',
-      '제 13회 목포국도1호선독립영화제 단편경쟁',
-      '나스 쇼트 필름페스티벌-나스어워드 2026',
-      '제18회 후쿠오카 인디펜던트 영화제 2026 경쟁 부문 (배우상 노미네이트)'
+      { text: '24년 명필름 단편스쿨 수료작', link: 'https://www.instagram.com/p/DEE5K6PP5_8/?img_index=2' },
+      { text: '제 3회 UFO 영화제 초청상영', link: 'https://www.instagram.com/p/DRJUAyyicC7/?img_index=2' },
+      { text: '제 4회 경기도예술영화제 대상', link: 'https://www.yjb0802.com/news/articleView.html?idxno=54461' },
+      { text: '2026 팔마·바사스 국제 단편 영화제 U-NEXT SELECTION' },
+      { text: '제 36회 유바리국제판타스틱영화제 국제단편경쟁', link: 'https://www.yubari-fanta.com/film/panic-disorder' },
+      { text: '제 13회 목포국도1호선독립영화제 단편경쟁', link: 'https://nr1iff.com/filmdetail/장애물넘기/아부지' },
+      { text: '나스 쇼트 필름페스티벌-나스어워드 2026', link: 'https://filmfest.nasu-fc.com/?pro=「父ちゃん」' },
+      { text: '제18회 후쿠오카 인디펜던트 영화제 2026 경쟁 부문 (배우상 노미네이트)', link: 'https://fidff.com/2026_films/competition/4929/' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1UQ7MLFAol5oGzx194FkiwXu9iDBbgU8D/view?usp=sharing',
@@ -141,8 +142,8 @@ export const PROJECTS: Project[] = [
     posterUrl: 'https://drive.google.com/file/d/18HQGrUhARjK7UTVnQyRi2GKvLzFY3KhX/view?usp=share_link',
     synopsis: "AI가 탑재된 전투기 조종사 노아 브릭스는 기체 이상으로 도심 추락 위기에 처한다. 수백 명의 민간인을 살리기 위해, AI가 그의 희생을 요구한다",
     awardsList: [
-      '제 5회 금천패션영화제 경쟁작',
-      '제 3회 죽서 AI 영화제 장려상 수상'
+      { text: '제 5회 금천패션영화제 경쟁작', link: 'https://gcfff.or.kr/2025/?p=0403&sec=A9&q=422' },
+      { text: '제 3회 죽서 AI 영화제 장려상 수상' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/18XM-ALuwdvh2NpLgHBSCMHolS9Gw8T_j/view?usp=sharing',
@@ -200,10 +201,11 @@ export const PROJECTS: Project[] = [
 지애는 아버지의 무덤 앞에서 탭 댄스를 추려고 한다. 
 도애는 그런 언니가 미쳤다고만 생각했다.`,
     awardsList: [
-      '11회 목포국도1호선독립영화제 도움닫기 작품상',
-      '경기갭이어프로그램 지원작',
-      '2024 김해시민영화제 초청상영',
-      '제 1회 느림독립영화제 입상'
+      { text: '경기갭이어프로그램 지원작' },
+      { text: '24년 11회 목포국도1호선독립영화제 도움닫기 작품상', link: 'https://www.instagram.com/p/C-XksNshhud/?img_index=1' },
+      { text: '2024 김해시민영화제 초청상영', link: 'https://blog.naver.com/cornertheate/223632946096' },
+      { text: '제 1회 느림독립영화제 입상', link: 'https://www.instagram.com/p/DOoHJX_k4Gk/' },
+      { text: '씨네필 매거진 리뷰 기사', link: 'http://www.cinephile.kr/news/articleView.html?idxno=571' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1jnM76xd-NCiqlYCPqErZB4B8jWWSCZzx/view?usp=sharing',
@@ -244,9 +246,9 @@ export const PROJECTS: Project[] = [
 
 진짜 서이서가 사진전에 찾아오는데...`,
     awardsList: [
-      '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트',
-      '프로젝트 백백백',
-      '한국영상자료원 상영'
+      { text: '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트' },
+      { text: '프로젝트 백백백', link: 'https://tumblbug.com/projectonehundred' },
+      { text: '한국영상자료원 상영' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1y99mPVzrkYVLQpxYWCZxtVDdgy0EqmxG/view?usp=sharing',
@@ -396,8 +398,8 @@ export const PROJECTS: Project[] = [
     posterUrl: 'https://drive.google.com/file/d/18HQGrUhARjK7UTVnQyRi2GKvLzFY3KhX/view?usp=share_link',
     synopsis: "AI가 탑재된 전투기 조종사 노아 브릭스는 기체 이상으로 도심 추락 위기에 처한다.",
     awardsList: [
-      '제 5회 금천패션영화제 경쟁작',
-      '제 3회 죽서 AI 영화제 장려상 수상'
+      { text: '제 5회 금천패션영화제 경쟁작', link: 'https://gcfff.or.kr/2025/?p=0403&sec=A9&q=422' },
+      { text: '제 3회 죽서 AI 영화제 장려상 수상' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/18XM-ALuwdvh2NpLgHBSCMHolS9Gw8T_j/view?usp=sharing',
@@ -492,9 +494,9 @@ export const PROJECTS: Project[] = [
 
 진짜 서이서가 사진전에 찾아오는데...`,
     awardsList: [
-      '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트',
-      '프로젝트 백백백',
-      '한국영상자료원 상영'
+      { text: '백일안에 백만원으로 백분짜리 장편영화 찍기 프로젝트' },
+      { text: '프로젝트 백백백', link: 'https://tumblbug.com/projectonehundred' },
+      { text: '한국영상자료원 상영' }
     ],
     stillPhotos: [
       'https://drive.google.com/file/d/1y99mPVzrkYVLQpxYWCZxtVDdgy0EqmxG/view?usp=sharing',

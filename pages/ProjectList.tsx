@@ -149,14 +149,31 @@ const ProjectList: React.FC<ProjectListProps> = ({ category, projects }) => {
                   
                   {project.awardsList && project.awardsList.length > 0 && (
                     <div className="space-y-1.5 pt-2 border-t border-white/5">
-                      {project.awardsList.slice(0, 3).map((award, idx) => (
-                        <div key={idx} className="flex items-start gap-2">
-                          <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
-                          <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
-                            {award}
-                          </p>
-                        </div>
-                      ))}
+                      {project.awardsList.slice(0, 3).map((award, idx) => {
+                        const text = typeof award === 'string' ? award : award.text;
+                        const link = typeof award === 'object' ? award.link : undefined;
+
+                        return (
+                          <div key={idx} className="flex items-start gap-2">
+                            <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
+                            {link ? (
+                              <a
+                                href={link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="text-[9px] md:text-[10px] text-neutral-500 hover:text-yellow-400 hover:underline leading-tight italic line-clamp-1 cursor-pointer transition-colors"
+                              >
+                                {text}
+                              </a>
+                            ) : (
+                              <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
+                                {text}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

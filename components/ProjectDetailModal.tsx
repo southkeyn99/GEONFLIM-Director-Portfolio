@@ -134,12 +134,28 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClos
                   <h3 className="text-[10px] uppercase tracking-[0.5em] text-yellow-600 font-black">Recognition</h3>
                 </div>
                 <ul className="space-y-5">
-                  {project.awardsList.map((award, i) => (
-                    <li key={i} className="flex items-start gap-5 text-neutral-400 text-base md:text-lg font-light group">
-                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-600 mt-2.5 group-hover:bg-neutral-400 transition-colors"></span>
-                      <span className="group-hover:text-white transition-colors duration-300 leading-snug">{award}</span>
-                    </li>
-                  ))}
+                  {project.awardsList.map((award, i) => {
+                    const text = typeof award === 'string' ? award : award.text;
+                    const link = typeof award === 'object' ? award.link : undefined;
+
+                    return (
+                      <li key={i} className="flex items-start gap-5 text-neutral-400 text-base md:text-lg font-light group">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-600 mt-2.5 group-hover:bg-neutral-400 transition-colors"></span>
+                        {link ? (
+                          <a 
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group-hover:text-white hover:text-yellow-400 hover:underline transition-colors duration-300 leading-snug cursor-pointer"
+                          >
+                            {text}
+                          </a>
+                        ) : (
+                          <span className="group-hover:text-white transition-colors duration-300 leading-snug">{text}</span>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}

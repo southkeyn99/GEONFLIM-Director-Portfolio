@@ -7,6 +7,11 @@ export enum ProjectCategory {
   COMMERCIAL = 'Commercial'
 }
 
+export interface AwardItem {
+  text: string;
+  link?: string;
+}
+
 export interface Project {
   id: string;
   category: ProjectCategory;
@@ -17,7 +22,7 @@ export interface Project {
   description?: string;
   posterUrl?: string;
   awards?: string;
-  awardsList?: string[];
+  awardsList?: (string | AwardItem)[];
   isAI?: boolean;
   isFeature?: boolean;
   link?: string;

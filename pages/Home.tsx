@@ -94,12 +94,28 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
                     
                     {project.awardsList && project.awardsList.length > 0 && (
                       <ul className="space-y-2.5">
-                        {project.awardsList.map((award, idx) => (
-                          <li key={idx} className="text-neutral-400 text-[14px] md:text-[16px] font-normal leading-relaxed flex items-start gap-3">
-                            <span className="text-neutral-600 mt-1.5 text-[8px] flex-shrink-0">●</span>
-                            <span className="flex-1 opacity-90">{award}</span>
-                          </li>
-                        ))}
+                        {project.awardsList.map((award, idx) => {
+                          const text = typeof award === 'string' ? award : award.text;
+                          const link = typeof award === 'object' ? award.link : undefined;
+
+                          return (
+                            <li key={idx} className="text-neutral-400 text-[14px] md:text-[16px] font-normal leading-relaxed flex items-start gap-3">
+                              <span className="text-neutral-600 mt-1.5 text-[8px] flex-shrink-0">●</span>
+                              {link ? (
+                                <a 
+                                  href={link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex-1 opacity-90 hover:opacity-100 hover:text-yellow-400 hover:underline transition-colors cursor-pointer"
+                                >
+                                  {text}
+                                </a>
+                              ) : (
+                                <span className="flex-1 opacity-90">{text}</span>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
                     )}
                   </div>
