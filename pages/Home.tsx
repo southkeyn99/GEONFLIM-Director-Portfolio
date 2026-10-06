@@ -133,22 +133,19 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black overflow-hidden">
-          {/* Full Hero Background Container (Reverted to original uncropped full ratio) */}
-          <div className="w-full h-full relative [mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_8%,black_92%,transparent_100%)]">
-            {/* Background Image (7th still photo) - Brightened for enhanced visibility */}
-            <img 
-              src={formatImageUrl("https://drive.google.com/file/d/1SZ5dJVlaoT9ORM5ejdyHc3F9_8ZfBdD8/view?usp=sharing")} 
-              alt="Hero Background" 
-              onError={(e) => {
-                e.currentTarget.src = '/images/the_last_letter_7.jpg';
-              }}
-              className="w-full h-full object-cover object-center opacity-100 brightness-125 contrast-[1.08]"
-            />
+          {/* Background Image (7th still photo of 유서 파이널 최종) */}
+          <img 
+            src="/images/the_last_letter_7.jpg" 
+            alt="Hero Background" 
+            onError={(e) => {
+              e.currentTarget.src = formatImageUrl("https://drive.google.com/file/d/1SZ5dJVlaoT9ORM5ejdyHc3F9_8ZfBdD8/view?usp=sharing");
+            }}
+            className="w-full h-full object-cover object-center brightness-125 contrast-[1.08]"
+          />
 
-            {/* Natural top and bottom edge blending */}
-            <div className="absolute inset-x-0 top-0 h-24 md:h-36 bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none"></div>
-            <div className="absolute inset-x-0 bottom-0 h-28 md:h-44 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
-          </div>
+          {/* Natural top and bottom edge blending gradients */}
+          <div className="absolute inset-x-0 top-0 h-32 md:h-44 bg-gradient-to-b from-black via-black/60 to-transparent pointer-events-none"></div>
+          <div className="absolute inset-x-0 bottom-0 h-36 md:h-52 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none"></div>
 
           {/* Subtle cinematic vignette */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 pointer-events-none"></div>
@@ -312,14 +309,31 @@ const Home: React.FC<HomeProps> = ({ projects, director }) => {
                     
                     {project.awardsList && project.awardsList.length > 0 && (
                       <div className="space-y-1.5 pt-2 border-t border-white/5">
-                        {project.awardsList.slice(0, 3).map((award, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
-                            <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
-                              {award}
-                            </p>
-                          </div>
-                        ))}
+                        {project.awardsList.slice(0, 3).map((award, idx) => {
+                          const text = typeof award === 'string' ? award : award.text;
+                          const link = typeof award === 'object' ? award.link : undefined;
+
+                          return (
+                            <div key={idx} className="flex items-start gap-2">
+                              <i className="fas fa-award text-[8px] text-yellow-600 mt-1"></i>
+                              {link ? (
+                                <a
+                                  href={link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="text-[9px] md:text-[10px] text-neutral-500 hover:text-yellow-400 hover:underline leading-tight italic line-clamp-1 cursor-pointer transition-colors"
+                                >
+                                  {text}
+                                </a>
+                              ) : (
+                                <p className="text-[9px] md:text-[10px] text-neutral-500 leading-tight italic line-clamp-1">
+                                  {text}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
